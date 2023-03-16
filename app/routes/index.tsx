@@ -1,41 +1,28 @@
-import type { LoaderArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import Lottie from "lottie-react";
-import duck from "../../public/duck.json";
-import rocket from "../../public/rocket.json";
-import working from "../../public/working.json";
-
-export const loader = async (args: LoaderArgs) => {
-  const data = [
-    { text: `We're coming. Be ready.`, animation: duck },
-    { text: `Launching soon. Strap on.`, animation: rocket },
-    {
-      text: `Come again later. We're crafting something special.`,
-      animation: working,
-    },
-  ];
-
-  const index = 0; // Math.floor(Math.random() * data.length);
-
-  return json(data[index]);
-};
-
-export const handle = { hydrate: true };
+export const handle = { hydrate: false };
 
 export default function Index() {
-  const { animation, text } = useLoaderData<typeof loader>();
   return (
-    <div className="flex flex-col space-y-2 p-8">
-      <div className="mx-auto max-w-sm max-h-16">
-        <Lottie animationData={animation} loop={true} />
-        <p className="text-center text-xl font-extrabold">{text}</p>
-        <p className="text-center text-xs text-white">
-          Namanya Spanduck. Dari kata spanduk. Tapi biar ada kata binatangnya
-          kek Bannerbear, jadi Spanduck. That's right, we're clonning Bannerbear
-          lol.
-        </p>
+    <div className="flex flex-col justify-center h-screen p-4 px-8 space-y-6 sm:p-8 sm:space-y-8">
+      <div
+        className="flex flex-col items-center justify-center text-4xl antialiased font-extrabold tracking-wide text-transparent uppercase bg-center bg-cover bg-clip-text sm:text-7xl"
+        style={{
+          backgroundImage:
+            "url(https://media.giphy.com/media/xTiTniuHdUjpOlNo1q/source.gif)",
+        }}
+      >
+        <h1 className="text-4xl font-extrabold md:text-9xl">
+          Effortlessly generate beautiful social media image from a tweet or a
+          webpage.
+        </h1>
       </div>
+      <a
+        href="#_"
+        className="relative self-start px-6 py-3 font-bold text-black group"
+      >
+        <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-red-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+        <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+        <span className="relative">Try Spanduck FOR FREE!</span>
+      </a>
     </div>
   );
 }
